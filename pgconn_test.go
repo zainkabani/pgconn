@@ -18,11 +18,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jackc/pgconn"
 	"github.com/jackc/pgmock"
 	"github.com/jackc/pgproto3/v2"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/zainkabani/pgconn"
 )
 
 func TestConnect(t *testing.T) {
@@ -1798,7 +1798,7 @@ func TestConnCopyFromQueryNoTableError(t *testing.T) {
 	ensureConnValid(t, pgConn)
 }
 
-// https://github.com/jackc/pgconn/issues/21
+// https://github.com/zainkabani/pgconn/issues/21
 func TestConnCopyFromNoticeResponseReceivedMidStream(t *testing.T) {
 	t.Parallel()
 

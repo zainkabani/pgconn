@@ -12,9 +12,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jackc/pgconn"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/zainkabani/pgconn"
 )
 
 func TestParseConfig(t *testing.T) {
@@ -432,7 +432,7 @@ func TestParseConfig(t *testing.T) {
 				},
 			},
 		},
-		// https://github.com/jackc/pgconn/issues/72
+		// https://github.com/zainkabani/pgconn/issues/72
 		{
 			name:       "URL without host but with port still uses default host",
 			connString: "postgres://jack:secret@:1/mydb?sslmode=disable",
@@ -572,13 +572,13 @@ func TestParseConfig(t *testing.T) {
 			name:       "target_session_attrs primary",
 			connString: "postgres://jack:secret@localhost:5432/mydb?sslmode=disable&target_session_attrs=primary",
 			config: &pgconn.Config{
-				User:          "jack",
-				Password:      "secret",
-				Host:          "localhost",
-				Port:          5432,
-				Database:      "mydb",
-				TLSConfig:     nil,
-				RuntimeParams: map[string]string{},
+				User:            "jack",
+				Password:        "secret",
+				Host:            "localhost",
+				Port:            5432,
+				Database:        "mydb",
+				TLSConfig:       nil,
+				RuntimeParams:   map[string]string{},
 				ValidateConnect: pgconn.ValidateConnectTargetSessionAttrsPrimary,
 			},
 		},
@@ -586,13 +586,13 @@ func TestParseConfig(t *testing.T) {
 			name:       "target_session_attrs standby",
 			connString: "postgres://jack:secret@localhost:5432/mydb?sslmode=disable&target_session_attrs=standby",
 			config: &pgconn.Config{
-				User:          "jack",
-				Password:      "secret",
-				Host:          "localhost",
-				Port:          5432,
-				Database:      "mydb",
-				TLSConfig:     nil,
-				RuntimeParams: map[string]string{},
+				User:            "jack",
+				Password:        "secret",
+				Host:            "localhost",
+				Port:            5432,
+				Database:        "mydb",
+				TLSConfig:       nil,
+				RuntimeParams:   map[string]string{},
 				ValidateConnect: pgconn.ValidateConnectTargetSessionAttrsStandby,
 			},
 		},
@@ -647,7 +647,7 @@ func TestParseConfig(t *testing.T) {
 	}
 }
 
-// https://github.com/jackc/pgconn/issues/47
+// https://github.com/zainkabani/pgconn/issues/47
 func TestParseConfigDSNWithTrailingEmptyEqualDoesNotPanic(t *testing.T) {
 	_, err := pgconn.ParseConfig("host= user= password= port= database=")
 	require.NoError(t, err)
@@ -658,7 +658,7 @@ func TestParseConfigDSNLeadingEqual(t *testing.T) {
 	require.Error(t, err)
 }
 
-// https://github.com/jackc/pgconn/issues/49
+// https://github.com/zainkabani/pgconn/issues/49
 func TestParseConfigDSNTrailingBackslash(t *testing.T) {
 	_, err := pgconn.ParseConfig(`x=x\`)
 	require.Error(t, err)

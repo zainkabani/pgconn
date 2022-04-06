@@ -6,10 +6,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/jackc/pgconn"
-	"github.com/jackc/pgproto3/v2"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/zainkabani/pgconn"
+	"github.com/zainkabani/pgproto3/v3"
 )
 
 // frontendWrapper allows to hijack a regular frontend, and inject a specific response

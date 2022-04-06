@@ -1,5 +1,5 @@
-[![](https://godoc.org/github.com/jackc/pgconn?status.svg)](https://godoc.org/github.com/jackc/pgconn)
-![CI](https://github.com/jackc/pgconn/workflows/CI/badge.svg)
+[![](https://godoc.org/github.com/zainkabani/pgconn?status.svg)](https://godoc.org/github.com/zainkabani/pgconn)
+![CI](https://github.com/zainkabani/pgconn/workflows/CI/badge.svg)
 
 # pgconn
 
