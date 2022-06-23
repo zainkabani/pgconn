@@ -979,6 +979,7 @@ func (pgConn *PgConn) Exec(ctx context.Context, sql string) *MultiResultReader {
 			return multiResult
 		default:
 		}
+		pgConn.readContextWatcher.Watch(ctx)
 		pgConn.writeContextWatcher.Watch(ctx)
 	}
 
@@ -988,6 +989,7 @@ func (pgConn *PgConn) Exec(ctx context.Context, sql string) *MultiResultReader {
 	n, err := pgConn.conn.Write(buf)
 	if err != nil {
 		pgConn.asyncClose()
+		pgConn.readContextWatcher.Unwatch()
 		pgConn.writeContextWatcher.Unwatch()
 		multiResult.closed = true
 		multiResult.err = &writeError{err: err, safeToRetry: n == 0}
@@ -1753,7 +1755,7 @@ func Construct(hc *HijackedConn) (*PgConn, error) {
 	}
 
 	pgConn.readContextWatcher = newReadWriteContextWatcher(pgConn.conn, false)
-	pgConn.readContextWatcher = newReadWriteContextWatcher(pgConn.conn, true)
+	pgConn.writeContextWatcher = newReadWriteContextWatcher(pgConn.conn, true)
 
 	return pgConn, nil
 }
